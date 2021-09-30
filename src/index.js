@@ -1,6 +1,8 @@
-import LinkedList from "./concepts/LinkedList";
+import Stack from "./data-structures/Stack";
 
-const linkedList = new LinkedList(1);
-console.log(linkedList.push(2));
-console.log(linkedList.push(3));
-console.log("linkedList", linkedList);
+const stack = new Stack(1);
+console.log(stack.push(3));
+console.log(stack.pop());
+console.log(stack.pop());
+
+console.log("stack", stack);
