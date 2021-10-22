@@ -109,6 +109,10 @@ myTree.insert(27);
 myTree.insert(52);
 myTree.insert(82);
 
+//      47
+//    21  76
+// 18  27  52  82
+
 myTree.BFS();
 // [47, 21, 76, 18, 27, 52, 82]
 
