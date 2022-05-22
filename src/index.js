@@ -1,8 +1,10 @@
-import Stack from "./data-structures/Stack";
+function solution(numbers) {}
 
-const stack = new Stack(1);
-console.log(stack.push(3));
-console.log(stack.pop());
-console.log(stack.pop());
-
-console.log("stack", stack);
+console.log(
+  'result',
+  solution([
+    [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    [3, 4, 5, 3, 4, 5, 3, 4, 5],
+    [1, 2, 1, 2, 1, 2, 1, 2, 1],
+  ])
+);

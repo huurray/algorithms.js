@@ -4,6 +4,6 @@ function 순서대로중복없는조합(arr, result) {
     result.push(arr.slice(0, i + 1));
   }
   arr.shift();
-  combination(arr, result);
+  순서대로중복없는조합(arr, result);
   return result;
 }
