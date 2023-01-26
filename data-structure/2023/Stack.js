@@ -71,6 +71,6 @@ var helper = new Stack();
 
 towerOfHanoi(3, source, dest, helper);
 
-source.print();
-helper.print();
-dest.print();
+console.log(source);
+console.log(helper);
+console.log(dest);
