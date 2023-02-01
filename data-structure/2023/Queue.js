@@ -1,42 +1,41 @@
 function Queue() {
-  var items = [];
+  let items = [];
 
-  this.enqueue = function (element) {
+  this.enqueue = (element) => {
     items.push(element);
   };
 
-  this.dequeue = function () {
+  this.dequeue = () => {
     return items.shift();
   };
 
-  this.front = function () {
+  this.front = () => {
     return items[0];
   };
 
-  this.isEmpty = function () {
+  this.isEmpty = () => {
     return items.length == 0;
   };
 
-  this.clear = function () {
+  this.clear = () => {
     items = [];
   };
 
-  this.size = function () {
+  this.size = () => {
     return items.length;
   };
 
-  this.print = function () {
-    console.log(items.toString());
+  this.get = () => {
+    return items;
   };
 }
 
-var queue = new Queue();
-console.log(queue.isEmpty()); //결과는 true
+const queue = new Queue();
+console.log(queue.isEmpty());
 queue.enqueue("John");
 queue.enqueue("Jack");
 queue.enqueue("Camila");
-console.log(queue.size()); //결과는 3
-console.log(queue.isEmpty()); //결과는 false
+console.log(queue.size());
 queue.dequeue();
 queue.dequeue();
-console.log(queue);
+console.log(queue.get());

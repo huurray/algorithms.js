@@ -177,10 +177,6 @@ function DoublyLinkedList() {
     return s;
   };
 
-  this.print = function () {
-    console.log(this.toString());
-  };
-
   this.printInverse = function () {
     console.log(this.inverseToString());
   };

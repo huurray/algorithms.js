@@ -10,12 +10,12 @@ class LinkedList {
     const newNode = new Node(value);
     this.head = newNode;
     this.tail = this.head;
-    this.length = 1;
+    this.length = 0;
   }
 
   push(value) {
     const newNode = new Node(value);
-    if (!this.head) {
+    if (!this.head.value) {
       this.head = newNode;
       this.tail = newNode;
     } else {
@@ -46,7 +46,7 @@ class LinkedList {
 
   unshift(value) {
     const newNode = new Node(value);
-    if (!this.head) {
+    if (!this.head.value) {
       this.head = newNode;
       this.tail = newNode;
     } else {
@@ -126,5 +126,18 @@ class LinkedList {
     }
     return this;
   }
+
+  toString() {
+    let current = this.head;
+    let string = "";
+
+    while (current) {
+      console.log(current);
+      if (current.value) {
+        string += current.value;
+      }
+      current = current.next;
+    }
+    return string;
+  }
 }
-export default LinkedList;

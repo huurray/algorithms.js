@@ -1,52 +1,45 @@
-function Stack() {
-  var items = [];
+// let fs = require("fs");
+// let input = fs.readFileSync("/dev/stdin").toString();
+// const N = Number(input);
 
-  this.push = function (element) {
+function Stack() {
+  let items = [];
+
+  this.push = (element) => {
     items.push(element);
   };
 
-  this.pop = function () {
+  this.pop = () => {
     return items.pop();
   };
 
-  this.peek = function () {
+  this.peek = () => {
     return items[items.length - 1];
   };
 
-  this.isEmpty = function () {
+  this.isEmpty = () => {
     return items.length == 0;
   };
 
-  this.size = function () {
+  this.size = () => {
     return items.length;
   };
 
-  this.clear = function () {
+  this.get = () => {
+    return items;
+  };
+
+  this.clear = () => {
     items = [];
-  };
-
-  this.print = function () {
-    console.log(items.toString());
-  };
-
-  this.toString = function () {
-    return items.toString();
   };
 }
 
-var stack = new Stack();
-console.log(stack.isEmpty()); //결과는 true
-stack.push(5);
-stack.push(8);
-console.log(stack.peek()); // 결과는 8
-stack.push(11);
-console.log(stack.size()); // 결과는 3
-console.log(stack.isEmpty()); //결과는 false
-stack.push(15);
-stack.pop();
-stack.pop();
-console.log(stack.size()); // 결과는 2
-stack.print(); // 결과는 [5, 8]
+const stack = new Stack();
+stack.push(1);
+stack.push(2);
+console.log(stack.get());
+stack.push(3);
+console.log(stack.size());
 
 // 번외 - 하노이의 탑
 function towerOfHanoi(n, from, to, helper) {
@@ -54,23 +47,19 @@ function towerOfHanoi(n, from, to, helper) {
     towerOfHanoi(n - 1, from, helper, to);
     to.push(from.pop());
     console.log("-----");
-    console.log("Source: " + from.toString());
-    console.log("Dest: " + to.toString());
-    console.log("Helper: " + helper.toString());
+    console.log("Source: " + from.get());
+    console.log("Dest: " + to.get());
+    console.log("Helper: " + helper.get());
     towerOfHanoi(n - 1, helper, to, from);
   }
 }
 
-var source = new Stack();
+const source = new Stack();
 source.push(3);
 source.push(2);
 source.push(1);
 
-var dest = new Stack();
-var helper = new Stack();
+const dest = new Stack();
+const helper = new Stack();
 
 towerOfHanoi(3, source, dest, helper);
-
-console.log(source);
-console.log(helper);
-console.log(dest);
