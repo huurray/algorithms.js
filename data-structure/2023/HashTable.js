@@ -1,36 +1,36 @@
 function HashTable() {
   // 이걸 객체로 하면 HashMap
-  var table = [];
+  const table = [];
 
   // 충돌이 없어야 좋은 [해시 함수]
-  var hashFunction = function (key) {
-    var hash = 0;
-    for (var i = 0; i < key.length; i++) {
+  const hashFunction = (key) => {
+    let hash = 0;
+    for (let i = 0; i < key.length; i++) {
       hash += key.charCodeAt(i);
     }
-    return hash % 37;
+    return hash;
   };
 
-  var hashCode = function (key) {
+  const hashCode = (key) => {
     return hashFunction(key);
   };
 
-  this.put = function (key, value) {
-    var position = hashCode(key);
+  this.put = (key, value) => {
+    let position = hashCode(key);
     console.log(position + " - " + key);
     table[position] = value;
   };
 
-  this.get = function (key) {
+  this.get = (key) => {
     return table[hashCode(key)];
   };
 
-  this.remove = function (key) {
+  this.remove = (key) => {
     table[hashCode(key)] = undefined;
   };
 
-  this.print = function () {
-    for (var i = 0; i < table.length; ++i) {
+  this.print = () => {
+    for (let i = 0; i < table.length; ++i) {
       if (table[i] !== undefined) {
         console.log(i + ": " + table[i]);
       }
@@ -38,7 +38,7 @@ function HashTable() {
   };
 }
 
-var hash = new HashTable();
+const hash = new HashTable();
 
 hash.put("Gandalf", "gandalf@email.com");
 hash.put("John", "johnsnow@email.com");
