@@ -1,8 +1,8 @@
 function Dictionary() {
-  var items = {};
+  let items = {};
 
   this.set = function (key, value) {
-    items[key] = value; //{1}
+    items[key] = value;
   };
 
   this.remove = function (key) {
@@ -15,7 +15,6 @@ function Dictionary() {
 
   this.has = function (key) {
     return items.hasOwnProperty(key);
-    //return value in items;
   };
 
   this.get = function (key) {
@@ -57,7 +56,7 @@ function Dictionary() {
   };
 }
 
-var dictionary = new Dictionary();
+const dictionary = new Dictionary();
 
 dictionary.set("Gandalf", "gandalf@email.com");
 dictionary.set("John", "johnsnow@email.com");

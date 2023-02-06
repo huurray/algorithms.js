@@ -1,11 +1,9 @@
-# 자료구조 및 알고리즘 공부
+# Data structure and algorithm study
 
-# Data structures implemented in JavaScript 강의 - 2022
-
-from Udemy lecture ( Data Structures & Algorithms - JavaScript by Scott Barrett )
+## 2022 - Data structures implemented in JavaScript Lecture
 
 URL : https://www.udemy.com/course/data-structures-algorithms-javascript/
 
-# Learning JavaScript Data Structures and Algorithms 책 - 2023
+## 2023 - Learning JavaScript Data Structures and Algorithms Book
 
 URL : http://acornpub.co.kr/book/javascript-data-structure

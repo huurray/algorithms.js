@@ -1,35 +1,29 @@
 function solution(script) {
   const lines = script.toString().trim().split(/\n/g);
-  const inputs = lines[0].split(" ").map(Number);
-  inputs.sort();
+  const initNum = +lines[0];
 
-  let overlapNum = 0;
-  const overlapCount = 0;
-  for (let i = 0; i < inputs.length; i++) {
-    if (i === 0) continue;
-    if (inputs[i - 1] === inputs[i]) {
-      overlapNum = inputs[i];
-      overlapCount++;
-    }
+  let count = 0;
+
+  function recur(num) {
+    if (count !== 0 && num === initNum) return;
+    count++;
+    const stringNum = num >= 10 ? `${num}` : `0${num}`;
+
+    const calcNum = Number(stringNum[0]) + Number(stringNum[1]);
+    const stringCalcNum = calcNum >= 10 ? `${calcNum}` : `0${calcNum}`;
+
+    const newNum = Number(`${stringNum[1]}${stringCalcNum[1]}`);
+
+    recur(newNum);
   }
 
-  switch (overlapCount) {
-    case 2:
-      console.log(10000 + overlapNum * 1000);
-      break;
-    case 1:
-      console.log(1000 + overlapNum * 100);
-      break;
-    case 0:
-      console.log(inputs.at(-1) * 100);
-      break;
-    default:
-      break;
-  }
+  recur(initNum);
+
+  console.log(count);
 }
 
-// solution(require("fs").readFileSync("/dev/stdin"));
+solution(require("fs").readFileSync("/dev/stdin"));
 
 solution(`
-2 2 2 
+0
 `);

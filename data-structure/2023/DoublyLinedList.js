@@ -1,16 +1,16 @@
 function DoublyLinkedList() {
-  var Node = function (element) {
+  const Node = function (element) {
     this.element = element;
     this.next = null;
     this.prev = null;
   };
 
-  var length = 0;
-  var head = null;
-  var tail = null;
+  let length = 0;
+  let head = null;
+  let tail = null;
 
   this.append = function (element) {
-    var node = new Node(element);
+    const node = new Node(element);
 
     if (head === null) {
       //리스트가 비어있다면
@@ -30,10 +30,10 @@ function DoublyLinkedList() {
     //범위 이외의 값인지 체크한다
     if (position < 0 && position > length) return false;
 
-    var node = new Node(element),
-      current = head,
-      previous,
-      index = 0;
+    const node = new Node(element);
+    let current = head;
+    let previous;
+    let index = 0;
 
     if (position === 0) {
       //첫 번째 위치에 추가
@@ -75,9 +75,9 @@ function DoublyLinkedList() {
     //범위 이외의 값인지 체크한다
     if (position < 0 && position >= length) return null;
 
-    var current = head,
-      previous,
-      index = 0;
+    let current = head;
+    let previous;
+    let index = 0;
 
     //첫 번째 원소를 삭제한다
     if (position === 0) {
@@ -112,13 +112,13 @@ function DoublyLinkedList() {
   };
 
   this.remove = function (element) {
-    var index = this.indexOf(element);
+    const index = this.indexOf(element);
     return this.removeAt(index);
   };
 
   this.indexOf = function (element) {
-    var current = head,
-      index = -1;
+    let current = head;
+    let index = -1;
 
     //첫 번째 원소 체크
     if (element == current.element) {
@@ -154,8 +154,8 @@ function DoublyLinkedList() {
   };
 
   this.toString = function () {
-    var current = head,
-      s = current ? current.element : "";
+    let current = head;
+    let s = current ? current.element : "";
 
     while (current && current.next) {
       current = current.next;
@@ -166,8 +166,8 @@ function DoublyLinkedList() {
   };
 
   this.inverseToString = function () {
-    var current = tail,
-      s = current ? current.element : "";
+    let current = tail;
+    let s = current ? current.element : "";
 
     while (current && current.prev) {
       current = current.prev;
@@ -190,7 +190,7 @@ function DoublyLinkedList() {
   };
 }
 
-var list = new DoublyLinkedList();
+const list = new DoublyLinkedList();
 
 list.append(15);
 console.log(list);

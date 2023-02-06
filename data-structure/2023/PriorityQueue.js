@@ -1,5 +1,5 @@
 function PriorityQueue() {
-  var items = [];
+  let items = [];
 
   function QueueElement(element, priority) {
     this.element = element;
@@ -7,13 +7,13 @@ function PriorityQueue() {
   }
 
   this.enqueue = function (element, priority) {
-    var queueElement = new QueueElement(element, priority);
+    let queueElement = new QueueElement(element, priority);
 
     if (this.isEmpty()) {
       items.push(queueElement);
     } else {
-      var added = false;
-      for (var i = 0; i < items.length; i++) {
+      let added = false;
+      for (let i = 0; i < items.length; i++) {
         if (queueElement.priority < items[i].priority) {
           items.splice(i, 0, queueElement);
           added = true;
@@ -43,13 +43,13 @@ function PriorityQueue() {
   };
 
   this.print = function () {
-    for (var i = 0; i < items.length; i++) {
+    for (let i = 0; i < items.length; i++) {
       console.log(items[i].element + " - " + items[i].priority);
     }
   };
 }
 
-var priorityQueue = new PriorityQueue();
+const priorityQueue = new PriorityQueue();
 priorityQueue.enqueue("John", 2);
 priorityQueue.enqueue("Jack", 1);
 priorityQueue.enqueue("Camila", 1);
