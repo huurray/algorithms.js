@@ -1,4 +1,4 @@
-function Dictionary() {
+export function Dictionary() {
   let items = {};
 
   this.set = function (key, value) {

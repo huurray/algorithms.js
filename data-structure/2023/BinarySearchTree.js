@@ -59,6 +59,7 @@ function BinarySearchTree() {
     inOrderTraverseNode(root, callback);
   };
 
+  // 중위 순회
   const inOrderTraverseNode = function (node, callback) {
     if (node !== null) {
       inOrderTraverseNode(node.left, callback);
@@ -71,6 +72,7 @@ function BinarySearchTree() {
     preOrderTraverseNode(root, callback);
   };
 
+  // 전위 순회
   const preOrderTraverseNode = function (node, callback) {
     if (node !== null) {
       callback(node.key);
@@ -79,6 +81,7 @@ function BinarySearchTree() {
     }
   };
 
+  // 후위 순회
   this.postOrderTraverse = function (callback) {
     postOrderTraverseNode(root, callback);
   };
