@@ -1,4 +1,4 @@
-function Queue() {
+export function Queue() {
   let items = [];
 
   this.enqueue = (element) => {

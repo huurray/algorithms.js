@@ -1,4 +1,5 @@
 import { Dictionary } from "./Dictionary";
+import { Queue } from "./Queue";
 
 function Graph() {
   const vertices = []; //list
@@ -29,7 +30,8 @@ function Graph() {
   };
 
   const initializeColor = function () {
-    const color = [];
+    const color = []; // white: 미방문, grey: 방문, black: 완결
+
     for (let i = 0; i < vertices.length; i++) {
       color[vertices[i]] = "white";
     }
@@ -42,8 +44,8 @@ function Graph() {
     queue.enqueue(v);
 
     while (!queue.isEmpty()) {
-      const u = queue.dequeue(),
-        neighbors = adjList.get(u);
+      const u = queue.dequeue();
+      const neighbors = adjList.get(u);
       color[u] = "grey";
       for (let i = 0; i < neighbors.length; i++) {
         const w = neighbors[i];
@@ -86,6 +88,7 @@ function Graph() {
     console.log("탐색했음 " + u);
   };
 
+  // BFS로 최단경로 찾기
   this.BFS = function (v) {
     const color = initializeColor();
     const queue = new Queue();

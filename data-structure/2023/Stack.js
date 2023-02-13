@@ -1,8 +1,4 @@
-// let fs = require("fs");
-// let input = fs.readFileSync("/dev/stdin").toString();
-// const N = Number(input);
-
-function Stack() {
+export function Stack() {
   let items = [];
 
   this.push = (element) => {
