@@ -26,23 +26,6 @@ function Graph() {
     return s;
   };
 
-  this.dfs = (v, callback) => {
-    const visited = {};
-
-    function dfs(vertex) {
-      if (!vertex) return;
-      visited[vertex] = true;
-      callback && callback(vertex);
-      adjList[vertex].forEach((neighbor) => {
-        if (!visited[neighbor]) {
-          return dfs(neighbor);
-        }
-      });
-    }
-
-    dfs(v);
-  };
-
   this.bfs = function (v, callback) {
     const queue = [v];
     const visited = {};
@@ -64,39 +47,34 @@ function Graph() {
 }
 
 function solution(script) {
-  const lines = script.toString().trim().split(/\n/g);
-  const [N, M, V] = lines.shift().split(" ").map(Number);
+  const inputs = script.toString().trim().split(/\n/g);
+  const vNums = Number(inputs.shift());
+  const eNums = Number(inputs.shift());
 
   const graph = new Graph();
 
-  for (let i = 1; i <= N; i++) {
-    graph.addVertex(i);
+  for (let i = 0; i < vNums; i++) {
+    graph.addVertex(i + 1);
   }
 
-  for (let i = 0; i < M; i++) {
-    const [vertex1, vertex2] = lines[i].split(" ").map(Number);
-    graph.addEdge(vertex1, vertex2);
-    graph.addEdge(vertex2, vertex1);
+  for (let i = 0; i < eNums; i++) {
+    const [v, w] = inputs[i].split(" ").map(Number);
+    graph.addEdge(v, w);
+    graph.addEdge(w, v);
   }
 
-  let bfsResult = [];
-  let dfsResult = [];
+  let count = -1;
 
-  graph.dfs(V, (v) => dfsResult.push(v));
+  graph.bfs(1, () => count++);
 
-  graph.bfs(V, (v) => bfsResult.push(v));
-
-  console.log(dfsResult.join(" "));
-  console.log(bfsResult.join(" "));
+  console.log(count);
 }
 
 // solution(require("fs").readFileSync("/dev/stdin"));
 
 solution(`
-5 5 3
-5 4
-5 2
+3
+2
 1 2
-3 4
-3 1
+3 2
 `);

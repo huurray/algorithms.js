@@ -1,26 +1,23 @@
-import { Dictionary } from "./Dictionary";
-import { Queue } from "./Queue";
-
 function Graph() {
-  const vertices = []; //list
+  const vertices = [];
 
-  const adjList = new Dictionary();
+  const adjList = {};
 
-  this.addVertex = function (v) {
+  this.addVertex = (v) => {
     vertices.push(v);
-    adjList.set(v, []); //인접 리스트를 행렬과 함께 초기화한다
+    adjList[v] = [];
   };
 
-  this.addEdge = function (v, w) {
-    adjList.get(v).push(w);
-    //adjList.get(w).push(v);
+  this.addEdge = (v, w) => {
+    if (!adjList[v]) return;
+    adjList[v] = [...adjList[v], w].sort((a, b) => a - b);
   };
 
   this.toString = function () {
     let s = "";
     for (let i = 0; i < vertices.length; i++) {
       s += vertices[i] + " -> ";
-      const neighbors = adjList.get(vertices[i]);
+      const neighbors = adjList[vertices[i]];
       for (let j = 0; j < neighbors.length; j++) {
         s += neighbors[j] + " ";
       }
@@ -29,32 +26,67 @@ function Graph() {
     return s;
   };
 
-  const initializeColor = function () {
-    const color = []; // white: 미방문, grey: 방문, black: 완결
+  // this.dfs = (v, callback) => {
+  //   const visited = {};
+
+  //   function dfs(vertex) {
+  //     if (!vertex) return;
+  //     visited[vertex] = true;
+  //     callback && callback(vertex);
+  //     adjList[vertex].forEach((neighbor) => {
+  //       if (!visited[neighbor]) {
+  //         return dfs(neighbor);
+  //       }
+  //     });
+  //   }
+
+  //   dfs(v);
+  // };
+
+  // this.bfs = function (v, callback) {
+  //   const queue = [v];
+  //   const visited = {};
+  //   let currentVertex;
+  //   visited[v] = true;
+
+  //   while (queue.length) {
+  //     currentVertex = queue.shift();
+  //     callback && callback(currentVertex);
+
+  //     adjList[currentVertex].forEach((neighbor) => {
+  //       if (!visited[neighbor]) {
+  //         visited[neighbor] = true;
+  //         queue.push(neighbor);
+  //       }
+  //     });
+  //   }
+  // };
+
+  const initializeStep = function () {
+    const color = []; // off: 미방문, on: 방문, done: 완결
 
     for (let i = 0; i < vertices.length; i++) {
-      color[vertices[i]] = "white";
+      color[vertices[i]] = "off";
     }
     return color;
   };
 
   this.bfs = function (v, callback) {
-    const color = initializeColor();
-    const queue = new Queue();
-    queue.enqueue(v);
+    const color = initializeStep();
+    const queue = [v];
 
-    while (!queue.isEmpty()) {
-      const u = queue.dequeue();
-      const neighbors = adjList.get(u);
-      color[u] = "grey";
+    while (!queue.length) {
+      const u = queue.shift();
+      const neighbors = adjList[u];
+      color[u] = "on";
       for (let i = 0; i < neighbors.length; i++) {
         const w = neighbors[i];
-        if (color[w] === "white") {
-          color[w] = "grey";
-          queue.enqueue(w);
+        if (color[w] === "off") {
+          color[w] = "on";
+          queue.push(w);
         }
       }
-      color[u] = "black";
+      color[u] = "done";
       if (callback) {
         callback(u);
       }
@@ -62,59 +94,58 @@ function Graph() {
   };
 
   this.dfs = function (callback) {
-    const color = initializeColor();
+    const color = initializeStep();
 
     for (let i = 0; i < vertices.length; i++) {
-      if (color[vertices[i]] === "white") {
+      if (color[vertices[i]] === "off") {
         dfsVisit(vertices[i], color, callback);
       }
     }
   };
 
   const dfsVisit = function (u, color, callback) {
-    color[u] = "grey";
+    color[u] = "on";
     if (callback) {
       callback(u);
     }
     console.log("방문했음 " + u);
-    const neighbors = adjList.get(u);
+    const neighbors = adjList[u];
     for (let i = 0; i < neighbors.length; i++) {
       const w = neighbors[i];
-      if (color[w] === "white") {
+      if (color[w] === "off") {
         dfsVisit(w, color, callback);
       }
     }
-    color[u] = "black";
+    color[u] = "done";
     console.log("탐색했음 " + u);
   };
 
   // BFS로 최단경로 찾기
   this.BFS = function (v) {
-    const color = initializeColor();
-    const queue = new Queue();
+    const color = initializeStep();
+    const queue = [v];
     const d = [];
     const pred = [];
-    queue.enqueue(v);
 
     for (let i = 0; i < vertices.length; i++) {
       d[vertices[i]] = 0;
       pred[vertices[i]] = null;
     }
 
-    while (!queue.isEmpty()) {
-      const u = queue.dequeue(),
-        neighbors = adjList.get(u);
-      color[u] = "grey";
+    while (!queue.length) {
+      const u = queue.dequeue();
+      const neighbors = adjList[u];
+      color[u] = "on";
       for (i = 0; i < neighbors.length; i++) {
         const w = neighbors[i];
-        if (color[w] === "white") {
-          color[w] = "grey";
+        if (color[w] === "off") {
+          color[w] = "on";
           d[w] = d[u] + 1;
           pred[w] = u;
-          queue.enqueue(w);
+          queue.push(w);
         }
       }
-      color[u] = "black";
+      color[u] = "done";
     }
 
     return {
@@ -125,7 +156,7 @@ function Graph() {
 
   let time = 0;
   this.DFS = function () {
-    const color = initializeColor();
+    const color = initializeStep();
     const d = [];
     const f = [];
     const p = [];
@@ -138,7 +169,7 @@ function Graph() {
     }
 
     for (i = 0; i < vertices.length; i++) {
-      if (color[vertices[i]] === "white") {
+      if (color[vertices[i]] === "off") {
         DFSVisit(vertices[i], color, d, f, p);
       }
     }
@@ -152,17 +183,17 @@ function Graph() {
 
   const DFSVisit = function (u, color, d, f, p) {
     console.log("방문했음 " + u);
-    color[u] = "grey";
+    color[u] = "on";
     d[u] = ++time;
-    const neighbors = adjList.get(u);
+    const neighbors = adjList[u];
     for (let i = 0; i < neighbors.length; i++) {
       const w = neighbors[i];
-      if (color[w] === "white") {
+      if (color[w] === "off") {
         p[w] = u;
         DFSVisit(w, color, d, f, p);
       }
     }
-    color[u] = "black";
+    color[u] = "done";
     f[u] = ++time;
     console.log("탐색했음 " + u);
   };
