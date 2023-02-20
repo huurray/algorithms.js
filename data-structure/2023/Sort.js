@@ -160,24 +160,21 @@ function ArrayList() {
   this.binarySearch = function (item) {
     this.quickSort();
 
-    let low = 0;
-    let high = array.length - 1;
-    let mid;
+    let lowIndex = 0;
+    let highIndex = array.length - 1;
+    let midIndex;
     let element;
 
-    while (low <= high) {
-      mid = Math.floor((low + high) / 2);
-      element = array[mid];
-      console.log("정 가운데 원소는 " + element);
+    while (lowIndex <= highIndex) {
+      midIndex = Math.floor((lowIndex + highIndex) / 2);
+      element = array[midIndex];
       if (element < item) {
-        low = mid + 1;
-        console.log("low is " + low);
+        lowIndex = midIndex + 1;
       } else if (element > item) {
-        high = mid - 1;
-        console.log("high is " + high);
+        highIndex = midIndex - 1;
       } else {
         console.log("found it");
-        return mid;
+        return midIndex;
       }
     }
     return -1;
